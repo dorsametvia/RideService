@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/bookingFragment">
+    <fragment
+        android:id="@id/bookingFragment"
+        android:name="via.rider.interview.rideservice.bookings.BookingFragment"
+        android:label="BookingFragment"
+        tools:layout="@layout/fragmnet_booking">
+        <action
+            android:id="@+id/action_bookingFragment_to_proposalsFragment"
+            app:destination="@id/proposalsFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/proposalsFragment"
+        android:name="via.rider.interview.rideservice.proposal.ProposalsFragment"
+        android:label="ProposalsFragment"
+        tools:layout="@layout/fragment_proposals">
+        <argument
+            android:name="proposals"
+            app:argType="via.rider.interview.rideservice.proposal.Proposal[]" />
+    </fragment>
+
+</navigation>

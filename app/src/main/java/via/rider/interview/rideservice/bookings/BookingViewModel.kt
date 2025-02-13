@@ -1,7 +1,9 @@
 package via.rider.interview.rideservice.bookings
 
 import androidx.activity.result.launch
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -15,6 +17,8 @@ class BookingViewModel : ViewModel() {
 
     private val _proposals = MutableStateFlow<List<Proposal>>(emptyList())
     val proposals: StateFlow<List<Proposal>> = _proposals.asStateFlow()
+
+    val proposalsLiveData: LiveData<List<Proposal>> = _proposals.asLiveData()
 
     fun bookRide(
         pickUpLocation: String,

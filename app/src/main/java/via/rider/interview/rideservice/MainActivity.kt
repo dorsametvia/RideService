@@ -15,11 +15,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.get
 import androidx.navigation.navArgument
 import androidx.navigation.set
@@ -31,15 +34,29 @@ import via.rider.interview.rideservice.proposal.ProposalsView
 import via.rider.interview.rideservice.proposal.ProposalsViewModel
 import via.rider.interview.rideservice.ui.theme.RideServiceTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
+    // If you want to use Compose, set this to true
+    // If you want to use XML, set this to false
+    private val isCompose: Boolean = false
+    private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            MaterialTheme {
-                Surface(modifier = Modifier.fillMaxSize()) {
-                    ContentView()
+        if (isCompose) {
+            setContent {
+                MaterialTheme {
+                    Surface(modifier = Modifier.fillMaxSize()) {
+                        ContentView()
+                    }
                 }
             }
+        } else {
+            setContentView(R.layout.activity_main)
+
+            // Get the NavHostFragment from the layout
+            val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+            // Get the NavController from the NavHostFragment
+            navController = navHostFragment?.navController ?: error("Nav host not found")
         }
     }
 }
